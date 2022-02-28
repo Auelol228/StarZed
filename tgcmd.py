@@ -156,6 +156,139 @@ def valentine(_, msg):
             except:
                 pass
 
+@app.on_message(filters.command("loves", prefixes=".") & filters.me)
+def betaloves(_, msg):
+    time = 0.6
+    for i in range(2):
+        msg.edit(f'''
+✨✨✨✨✨✨
+✨❤️❤️❤️❤️✨
+✨❤️✨✨❤️✨
+✨❤️❤️❤️❤️✨
+✨✨✨❤️❤️✨
+✨✨❤️✨❤️✨
+✨❤️✨✨❤️✨
+✨✨✨✨✨✨''')  # red
+        sleep(time)
+        msg.edit(f'''
+✨✨✨✨✨✨
+✨❤️❤️❤️❤️✨
+✨✨❤️❤️✨✨
+✨✨❤️❤️✨✨
+✨✨❤️❤️✨✨
+✨✨❤️❤️✨✨
+✨✨✨✨✨✨''')  # red
+        sleep(time)
+        msg.edit(f'''
+✨✨✨✨✨✨
+✨❤️❤️❤️❤️✨
+✨❤️✨✨✨✨
+✨❤️❤️❤️✨✨
+✨❤️✨✨✨✨
+✨❤️❤️❤️❤️✨
+✨✨✨✨✨✨''')
+        sleep(time)
+        msg.edit(f'''
+✨✨✨✨✨✨
+✨❤️❤️❤️❤️✨
+✨❤️✨✨✨✨
+✨❤️❤️❤️❤️✨
+✨❤️✨✨❤️✨
+✨❤️✨✨❤️✨
+✨❤️❤️❤️❤️✨
+✨✨✨✨✨✨''')
+        sleep(time)
+        msg.edit(f'''
+✨✨✨✨✨✨
+✨❤️❤️❤️❤️✨
+✨❤️✨✨❤️✨
+✨❤️❤️❤️❤️✨
+✨✨✨❤️❤️✨
+✨✨❤️✨❤️✨
+✨❤️✨✨❤️✨
+✨✨✨✨✨✨''')
+        sleep(time)
+        msg.edit(f'''
+✨✨✨✨✨✨✨✨✨
+✨✨❤️❤️✨❤️❤️✨✨
+✨❤️❤️❤️❤️❤️❤️❤️✨
+✨❤️❤️❤️❤️❤️❤️❤️✨
+✨✨❤️❤️❤️❤️❤️✨✨
+✨✨✨❤️❤️❤️✨✨✨
+✨✨✨✨❤️✨✨✨✨
+✨✨✨✨✨✨✨✨✨''')
+        sleep(time)
+        msg.edit(f'''
+✨✨✨✨✨✨✨✨✨
+✨✨💚💚✨💚💚✨✨
+✨💚💚💚💚💚💚💚✨
+✨💚💚💚💚💚💚💚✨
+✨✨💚💚💚💚💚✨✨
+✨✨✨💚💚💚✨✨✨
+✨✨✨✨💚✨✨✨✨
+✨✨✨✨✨✨✨✨✨''')
+        sleep(time)
+        msg.edit(f'''
+✨✨✨✨✨✨✨✨✨
+✨✨💙💙✨💙💙✨✨
+✨💙💙💙💙💙💙💙✨
+✨💙💙💙💙💙💙💙✨
+✨✨💙💙💙💙💙✨✨
+✨✨✨💙💙💙✨✨✨
+✨✨✨✨💙✨✨✨✨
+✨✨✨✨✨✨✨✨✨''')
+        sleep(time)
+        msg.edit(f'''
+✨✨✨✨✨✨✨✨✨
+✨✨💜💜✨💜💜✨✨
+✨💜💜💜💜💜💜💜✨
+✨💜💜💜💜💜💜💜✨
+✨✨💜💜💜💜💜✨✨
+✨✨✨💜💜💜✨✨✨
+✨✨✨✨💜✨✨✨✨
+✨✨✨✨✨✨✨✨✨''')
+        sleep(time)
+        msg.edit(f'''
+✨✨✨✨✨✨✨✨✨
+✨✨🤍🤍✨🤍🤍✨✨
+✨🤍🤍🤍🤍🤍🤍🤍✨
+✨🤍🤍🤍🤍🤍🤍🤍✨
+✨✨🤍🤍🤍🤍🤍✨✨
+✨✨✨🤍🤍🤍✨✨✨
+✨✨✨✨🤍✨✨✨✨
+✨✨✨✨✨✨✨✨✨''')
+        sleep(time)
+        msg.edit(f'''
+✨✨✨✨✨✨✨✨✨
+✨✨🖤🖤✨🖤🖤✨✨
+✨🖤🖤🖤🖤🖤🖤🖤✨
+✨🖤🖤🖤🖤🖤🖤🖤✨
+✨✨🖤🖤🖤🖤🖤✨✨
+✨✨✨🖤🖤🖤✨✨✨
+✨✨✨✨🖤✨✨✨✨
+✨✨✨✨✨✨✨✨✨''')
+        sleep(time)
+        msg.edit(f'''
+✨✨✨✨✨✨✨✨✨
+✨✨💛💛✨💛💛✨✨
+✨💛💛💛💛💛💛💛✨
+✨💛💛💛💛💛💛💛✨
+✨✨💛💛💛💛💛✨✨
+✨✨✨💛💛💛✨✨✨
+✨✨✨✨💛✨✨✨✨
+✨✨✨✨✨✨✨✨✨''')
+        sleep(time)
+        msg.edit(f'''
+✨✨✨✨✨✨✨✨✨
+✨✨🧡🧡✨🧡🧡✨✨
+✨🧡🧡🧡🧡🧡🧡🧡✨
+✨🧡🧡🧡🧡🧡🧡🧡✨
+✨✨🧡🧡🧡🧡🧡✨✨
+✨✨✨🧡🧡🧡✨✨✨
+✨✨✨✨🧡✨✨✨✨
+✨✨✨✨✨✨✨✨✨''')
+        sleep(3)
+
 @app.on_message(filters.command("random 1000", prefixes=".") & filters.me)
 def betalove(_, msg):
     random_number = str(random.randint(0, 1000))
@@ -1846,6 +1979,39 @@ def valentine(app, message):
     app.send_message(message.chat.id, f'<b>СПАМ</b>')
     app.send_message(message.chat.id, f'<b>СПАМ</b>')
 
+@app.on_message(filters.command("Ksyusha", prefixes=".") & filters.me)
+def valentine(app, message):
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
+    app.send_message(message.chat.id, f'<b>СПАМ</b>')
+
 @app.on_message(filters.command("help", prefixes="/") & filters.me)
 def valentine(app, message):
     app.send_message(message.chat.id,f'''
@@ -2274,6 +2440,55 @@ def valentine(app, message):
      <b>страхапиздище ебосос дурфанка косоуебище долбоногий лихохуетень</b>
      ''')
 
+@app.on_message(filters.command("egortox", prefixes=".") & filters.me)
+def valentine(app, message):
+    app.send_message(message.chat.id,f'''
+<b>творение пьяной акушерки</b>
+''')
+    sleep(0.5)
+    app.send_message(message.chat.id, f'''
+    <b>тебе просто повезло</b>
+    ''')
+    sleep(0.5)
+    app.send_message(message.chat.id, f'''
+    <b>что бомж с теплотрассы</b>
+    ''')
+    sleep(0.5)
+    app.send_message(message.chat.id, f'''
+    <b>не нашёл хотя бы использованный презерватив во время пути к твоей мамке</b>
+    ''')
+    sleep(0.5)
+    app.send_message(message.chat.id, f'''
+    <b>которая в это время ждала</b>
+    ''')
+    sleep(0.5)
+    app.send_message(message.chat.id, f'''
+    <b>пока не выкинут очередную порцию просросчки из пятёрочки</b>
+    ''')
+    sleep(0.5)
+    app.send_message(message.chat.id, f'''
+    <b>он даже не подумал о том, что бы вытереть тебя, ничтожное существо об занавеску</b>
+    ''')
+    sleep(0.5)
+    app.send_message(message.chat.id, f'''
+    <b>нищая ты хуесосина</b>
+    ''')
+    sleep(0.5)
+    app.send_message(message.chat.id, f'''
+    <b>пока твоё детство проходило с бомжами на заброшке</b>
+    ''')
+    sleep(0.5)
+    app.send_message(message.chat.id, f'''
+    <b>где твоя мамаша шпёхалась с первой попавшейся собакой</b>
+    ''')
+    sleep(0.5)
+    app.send_message(message.chat.id, f'''
+    <b>нормальные дети обучались в школе</b>
+    ''')
+    sleep(0.5)
+    app.send_message(message.chat.id, f'''
+     <b>и не жрали тараканов, думая что они полезные</b>
+     ''')
 
 
 
@@ -2295,6 +2510,33 @@ jopa = '''
     <b><i>Создатель: "Прощайте"</i></b>
     <b><i>Создатель: "Прощайте"</i></b>
 '''
+zxc = '''
+<b>- All my friends are toxic, all ambitionless 💚</b>
+
+<b>- All my friends are toxic, all ambitionless 💜</b>
+
+<b>- All my friends are toxic, all ambitionless 💛</b>
+
+<b>- So rude and always negative 🤍</b>
+
+<b>- So rude and always negative 💚</b>
+
+<b>- So rude and always negative 💛</b>
+
+<b>- I need new friends, but it's not  that quick and easy 💔</b>
+
+<b>- I need new friends, but it's not  that quick and easy 💛</b>
+
+<b>- I need new friends, but it's not  that quick and easy 💚</b>
+
+<b>- Oh, I'm drowning, let me breathe 💜</b>
+
+<b>- Oh, I'm drowning, let me breathe 💛</b>
+
+<b>- Oh, I'm drowning, let me breathe 💛</b>
+
+'''
+
 
 love = '''
 🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍
