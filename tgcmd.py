@@ -2136,6 +2136,43 @@ def valentine(_, msg):
             except:
                 pass
 
+@app.on_message(filters.command("zxc", prefixes=".") & filters.me)
+def valentine(_, msg):
+    txt = zxc.split("\n")
+    e = True
+    etime = int(msg.text.split('.zxc', maxsplit=1)[1])
+    for i in txt:
+        time = etime
+        if e == True:
+            e = False
+        elif time > 10:
+            try:
+                msg.edit('<b>Error: Нельзя ставить больше 10с!</b>')
+                sleep(0.5)
+                msg.delete()
+            except:
+                pass
+        else:
+            try:
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+            except:
+                pass
+
 @app.on_message(filters.command("ziga", prefixes=".") & filters.me)
 def valentine(_, msg):
     txt = ziga.split("\n\n")
@@ -2510,7 +2547,6 @@ jopa = '''
     <b><i>Создатель: "Прощайте"</i></b>
     <b><i>Создатель: "Прощайте"</i></b>
 '''
-
 zxc = '''
 <b>- All my friends are toxic, all ambitionless 💚</b>
 
