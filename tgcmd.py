@@ -2010,7 +2010,7 @@ def valentine(app, message):
     app.send_message(message.chat.id, f'<b>Ксюша</b>')
     app.send_message(message.chat.id, f'<b>Ксюша</b>')
     app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
+    app.send_message(message.chat.id, f'<b>Ксюша</b>')
 
 @app.on_message(filters.command("help", prefixes="/") & filters.me)
 def valentine(app, message):
@@ -2510,6 +2510,7 @@ jopa = '''
     <b><i>Создатель: "Прощайте"</i></b>
     <b><i>Создатель: "Прощайте"</i></b>
 '''
+
 zxc = '''
 <b>- All my friends are toxic, all ambitionless 💚</b>
 
