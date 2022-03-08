@@ -1,60 +1,54 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import random
+import pickle
 from time import sleep
-from pyrogram import Client, filters, sync
-from pyrogram.errors import FloodWait
-import os
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
-from pyrogram.types import ChatPermissions
-import time
-from time import sleep
-if os.sys.platform == "win32":
-    os.system("cls")
-else:
-    os.system("clear")
-app = Client('cmd', api_id=1016382, api_hash='c27834e5683d50a9bacf835a95ec4763')
+import os
+
+app = Client('cmd', api_id=15897262, api_hash='90476d9c65a86b03837e1e249314cd75')
 
 app.start()
 
 app.stop()
-print('''
-      ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-      ┃       Made by Criblle               Созданно Criblle        ┃
-      ┃  Telegram: @starzedscript    Телеграм-канал: @starzedscript ┃
-      ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+if os.sys.platform == "win32":
+    os.system("cls")
+else:
+    os.system("clear")
+print('''   v0.8
+      ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+      ┃-------Made by Negrtox-------┃
+      ┃--VK: vk.com/4elokot228--┃
+      ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ''')
-print("После ввода задержки напишите в любой телеграм чат команду /help для просмотра команд!")
-print("\n МЫ НЕ НЕСЕМ ОТВЕТСВЕННОСТИ ЗА ВАШИ ДЕЙСТВИЯ!")
+print("После ввода задержки напиши в любой телеграм чат команду /help для просмотра команд!")
+print("\n Я не несу ответственность за твои действия.")
 print()
-cool = int(input("Введите завис.число - от него будет зависеть скорость (Норма 8):  "))
+cool = int(input("Введи завис.число - от него будет зависеть скорость (Минимум 3):  "))
+
+global number
+number = 0
 
 while cool == 0:
     print("Слишком быстро!")
-    cool = int(input("Введите завис.число - от него будет зависеть скорость (Норма 8):  "))
+    cool = int(input("Введи завис.число - от него будет зависеть скорость (Минимум 3):  "))
 
 while cool == 1:
     print("Слишком быстро!")
-    cool = int(input("Введите завис.число - от него будет зависеть скорость (Норма 8):  "))
+    cool = int(input("Введи завис.число - от него будет зависеть скорость (Минимум 3):  "))
 
 while cool == 2:
     print("Слишком быстро!")
-    cool = int(input("Введите завис.число - от него будет зависеть скорость (Норма 8):  "))
+    cool = int(input("Введи завис.число - от него будет зависеть скорость (Минимум 3):  "))
 
 while cool > 10:
     print("Слишком медленно!")
-    cool = int(input("Введите завис.число - от него будет зависеть скорость (Норма 8):  "))
+    cool = int(input("Введи завис.число - от него будет зависеть скорость (Максимум 9):  "))
 
 while cool < 0:
-    print("ОЧЕНЬ БЫСТРО........")
-    cool = int(input("Введите завис.число - от него будет зависеть скорость (Норма 8):  "))
-
-
-
-
-
-       
+    print("Чё, дурак? Куда тебе столько")
+    cool = int(input("Введи завис.число - от него будет зависеть скорость (Минимум 3):  "))
 
 
 
@@ -94,12 +88,41 @@ def valentine(_, msg):
                 sleep(time/cool)
             except:
                 pass
+    global number
+    number = number + 1
 
 textded = '''
 <b> Я дед инсайд </b>
 <b> Мне 9 лет </b>
 <b> И я хочу в Психокидс </b>
 '''
+
+@app.on_message(filters.command("type", prefixes=".") & filters.me)
+def valentine(_, msg):
+    global number
+    number = number + 1
+    orig_text = msg.text.split(".type ", maxsplit=1)[1]
+    text = orig_text
+    tbp = ""
+    typing_symbol = "█"
+    while (tbp != orig_text):
+        try:
+            msg.edit(tbp + typing_symbol)
+            sleep(0.05)
+
+            tbp = tbp + text[0]
+            text = text[1:]
+
+            msg.edit(tbp)
+            sleep(0.05)
+
+        except FloodWait as e:
+            sleep(e.x)
+
+
+
+
+
 
 textded1 = '''
 <b>спокойной ночи зайка 💚</b>
@@ -118,6 +141,46 @@ textded1 = '''
 <b>💛 сильно 💛</b>
 <b>💜 люблю 💜</b>
 '''
+
+
+@app.on_message(filters.command("compli", prefixes=".") & filters.me)
+def valentine(_, msg):
+    txt = comp.split("\n")
+    e = True
+    etime = int(msg.text.split('.compli ', maxsplit=1)[1])
+    for i in txt:
+        time = etime
+        if e == True:
+            e = False
+        elif time > 10:
+            try:
+                msg.edit('<b>Error: Нельзя ставить больше 10с!</b>')
+                sleep(0.5)
+                msg.delete()
+            except:
+                pass
+        else:
+            try:
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+            except:
+                pass
+    global number
+    number = number + 1
 
 @app.on_message(filters.command("night", prefixes=".") & filters.me)
 def valentine(_, msg):
@@ -155,11 +218,926 @@ def valentine(_, msg):
                 sleep(time/cool)
             except:
                 pass
+    global number
+    number = number + 1
+
+@app.on_message(filters.command("random", prefixes=".") & filters.me)
+def random_(_, msg):
+    random_number = str(random.randint(0, int(msg.command[1])))
+    msg.edit(roi + random_number)
+
+
+
+too = random.randint(0, 100)
+roi = f'<b> Случайное число: </b>'
+    
+@app.on_message(filters.command("ghoul", prefixes=".") & filters.me)
+def valentine(app, message):
+    global number
+    number = number + 1
+    app.send_message(message.chat.id,f'<b>Ты гуль?</b>')
+    sleep(2)
+    app.send_message(message.chat.id,f'<i>Я тоже</i>')
+    sleep(5)
+    i = 1000
+    while i > 0:
+        try:
+            app.send_message(message.chat.id, f'{i} - 7 = {i-7}')
+        except FloodWait as e:
+            sleep(e.x)
+
+        i -= 7
+        sleep(0)
+
+    if(end_message != ''):
+        app.send_message(message.chat.id, end_message)
+
+@app.on_message(filters.command("spam", prefixes=".") & filters.me)
+def spam(app, message):
+    global number
+    number = number + 1
+    for _ in range(int(message.command[1])):
+        sleep(0.01)
+        app.send_message(message.chat.id, "<b>СПАМ</b>")
+
+@app.on_message(filters.command("ksu", prefixes=".") & filters.me)
+def spam(app, message):
+    global number
+    number = number + 1
+    for _ in range(int(message.command[1])):
+        sleep(0.01)
+        app.send_message(message.chat.id, "<b>Ксюша</b>")
+
+@app.on_message(filters.command("spamstick", prefixes=".") & filters.me)
+def spam(app, message):
+    global number
+    number = number + 1
+    for _ in range(int(message.command[1])):
+        sleep(0.01)
+        app.send_sticker(message.chat.id, "CAACAgIAAxkBAAEEEDZiI8ZlrkTWVAVlsaJ1yfd63euS2AACMgwAAgqBoEs52ePcv8NaIiME")
+
+@app.on_message(filters.command("help", prefixes="/") & filters.me)
+def valentine(app, message):
+    app.send_message(message.chat.id,f'''
+📙<b> Команды:
+
+📂Скрипт спама 1000-7
++ Введите: .ghoul
+
+📂Скрипт анимации «Я дед инсайд💚»
++ Введите .dead 5 
+
+📂Скрипт анимации для влюблённых: «Спокойной ночи❤️»
++ Введите .night 5
+
+📂Скрипт анимации «Я люблю тебя❤️‍🔥»
++ Введите .love 5 
+
+📂Скрипт анимации «ВЗЛОМ ЖОПЫ»
++ Введите .jopa 5 
+
+📂Скрипт анимации «ZIGA»
++ Введите .ziga 5 
+
+📂Скрипт анимации «Сердце»
++ Введите .heart 
+
+📂Скрипт анимации «Оскорбления 🔞»
++ Введите .toxic 
+
+📂Скрипт анимации «Я люблю когда волосатыe... »
++ Введите .maslo 
+
+📂Скрипт «Случайное число»
++ Введите .random 10/100/1000 
+(Примеры: .random 10 ; .random 100)
+
+📂Скрипт «СПАМ»
++ Введите .spam 30/100/500/1000 
+(Примеры: .spam 30 ; .spam 1000)
+
+📂 Скрипт анимации «Я ЛЮБЛЮ ТЕБЯ🤍»
++ Введите: .loves
+
+📂 Скрипт анимации «All my friends are toxiс..»
++ Введите: .zxc 3
+
+📂 Скрипт анимации «Дизлайк»
++ Введите: .dislike
+
+📂 Скрипт анимации «Лайк»
++ Введите: .like
+
+📂 Скрипт для красивого написания текста «TYPE»
++ Введите: .type "текст"
+
+📂 Скрипт для спама стикерами дизлайка «Spamstick»
++ Введите: .spamstick кол-во стикеров
+
+📂 Скрипт мини-игры «Kill»
++ Введите: .kill
+
+📂 Скрипт мини-игры «Футбол»
++ Введите: .football
+
+📂 Скрипт анимации «Комплименты» на 8 марта 
++ Введите: .compli 0
+
+📂 Профиль
++ Введите: /profile
+
+🔍 Все команды нужно писать в любой чат телеграмм после выполнения кода! (Ввода зависим. числа)
+5 в командах это скорость которую можно изменять (Пример: .jopa 0)
+
+Made by vk.com/4elokot228
+                          
+''', disable_web_page_preview=True)
+
+@app.on_message(filters.command("profile", prefixes="/") & filters.me)
+def help(app, message):
+    global number
+    #app.send_sticker(message.chat.id, "CAACAgIAAxkBAAEEEBZiI7rAcsLoSnaFlDjhCyi7KFcy6QACtg8AAg9W-UkHRqyQjgWY3iME")
+    app.send_message(
+        message.chat.id,
+        f"""💾<b> Профиль: </b> \n\n<b> Пользователь:</b><code> {message.from_user.first_name}</code>\n<i><b> PREMIUM </b>- Отсутствует</i>\n\n<b> Chat_ID: </b><code> {message.chat.id}</code>\n<b> User_ID: </b><code> {message.from_user.id}</code>\n<b> Анимаций по старту:</b> <code>{number}</code> </b>""",
+        disable_web_page_preview=True,
+    )
+
+@app.on_message(filters.command("maslo", prefixes=".") & filters.me)
+def betalove(_, msg):
+    time = 0.6
+    for i in range(1):
+        msg.edit(f"<b>я</b>")  # red
+        sleep(time)
+        msg.edit(f"<b>я люблю</b>")  # orange
+        sleep(time)
+        msg.edit(f"<b>я люблю когда</b>")  # orange
+        sleep(time)
+        msg.edit(f"<b>я люблю когда волосатые</b>")  # red
+        sleep(time)
+        msg.edit(f"<b>я люблю когда волосатые мужики</b>")  # orange
+        sleep(time)
+        msg.edit(f"<b>я люблю когда волосатые мужики обмазываются</b>")  # red
+        sleep(time)
+        msg.edit(f"<b>я люблю когда волосатые мужики обмазываются маслом 🧈</b>")  # orange
+        sleep(5)
+        global number
+        number = number + 1
+
+@app.on_message(filters.command("football", prefixes=".") & filters.me)
+def betalove(_, msg):
+    time = 0.6
+    for i in range(1):
+        msg.edit(f"<b>⚽️ Вы зашли на футбольное поле, вам предстоит забить пенальти, чтобы победить</b>")  # red
+        sleep(2)
+        msg.edit(f"<b>⏳ Подготовка к игре.</b>")  # orange
+        sleep(2)
+        msg.edit(f"<b>⌛ Подготовка к игре..</b>")  # orange
+        sleep(time)
+        msg.edit(f"<b>⏳ Подготовка к игре...</b>")  # red
+        sleep(time)
+        msg.edit(f"<b>⚽ Удар.</b>")  # orange
+        sleep(time)
+        msg.edit(f"<b>⚽ Удар..</b>")  # red
+        sleep(time)
+        msg.edit(f"<b>⚽ Удар...</b>")  # orange
+        sleep(time)
+        msg.edit(random.choice(foot))
+        sleep(5)
+        global number
+        number = number + 1
+
+foot = ["<b>❌ К сожалению, вы проиграли..</b>", "<b>✅ Вы забили гол и победили в игре!</b>"]
+
+@app.on_message(filters.command("kill", prefixes=".") & filters.me)
+def betalove(_, msg):
+    time = 0.6
+    for i in range(1):
+        msg.edit(f"<b>🔪 На тебя заказали убийство.</b>")  # red
+        sleep(3)
+        msg.edit(f"<b>👀 У тебя есть пару секунд чтобы спрятаться.</b>")  # orange
+        sleep(2)
+        msg.edit(f"<b>⏳ [ 5s ]</b>")  # orange
+        sleep(time)
+        msg.edit(f"<b>⌛ [ 4s ]</b>")  # red
+        sleep(time)
+        msg.edit(f"<b>⏳ [ 3s ]</b>")  # orange
+        sleep(time)
+        msg.edit(f"<b>⌛ [ 2s ]</b>")  # red
+        sleep(time)
+        msg.edit(f"<b>⏳ [ 1s ]</b>")  # orange
+        sleep(time)
+        msg.edit(f"<b>🔪 Убийца вышел на твои поиски, надеюсь ты хорошо спрятался</b>")  # orange
+        sleep(time)
+        msg.edit(f"<b>👀 Поиск.</b>")  # orange
+        sleep(time)
+        msg.edit(f"<b>👀 Поиск..</b>")  # orange
+        sleep(time)
+        msg.edit(f"<b>👀 Поиск...</b>")  # orange
+        sleep(time)
+        msg.edit(f"<b>👀 Поиск.</b>")  # orange
+        sleep(time)
+        msg.edit(f"<b>👀 Поиск..</b>")
+        sleep(time)
+        msg.edit(f"<b>👀 Поиск...</b>")
+        sleep(time)
+        msg.edit(random.choice(kill))
+        sleep(5)
+        global number
+        number = number + 1
+
+kill = ["<b>🔪 Убийца нашел тебя, к сожалению ты спрятался плохо и был убит</b>", "<b>⚔️Убийца не нашел тебя, вы  очень хорошо спрятались.</b>"]
+
+
+
+@app.on_message(filters.command("jopa", prefixes=".") & filters.me)
+def valentine(_, msg):
+    txt = jopa.split("\n")
+    e = True
+    etime = int(msg.text.split('.jopa ', maxsplit=1)[1])
+    for i in txt:
+        time = etime
+        if e == True:
+            e = False
+        elif time > 10:
+            try:
+                msg.edit('<b>Error: Нельзя ставить больше 10с!</b>')
+                sleep(0.5)
+                msg.delete()
+            except:
+                pass
+        else:
+            try:
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+            except:
+                pass
+    global number
+    number = number + 1
+
+@app.on_message(filters.command("love", prefixes=".") & filters.me)
+def valentine(_, msg):
+    txt = love.split("\n")
+    e = True
+    etime = int(msg.text.split('.love', maxsplit=1)[1])
+    for i in txt:
+        time = etime
+        if e == True:
+            e = False
+        elif time > 10:
+            try:
+                msg.edit('<b>Error: Нельзя ставить больше 10с!</b>')
+                sleep(0.5)
+                msg.delete()
+            except:
+                pass
+        else:
+            try:
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+            except:
+                pass
+    global number
+    number = number + 1
+
+@app.on_message(filters.command("zxc", prefixes=".") & filters.me)
+def valentine(_, msg):
+    txt = zxc.split("\n")
+    e = True
+    etime = int(msg.text.split('.zxc', maxsplit=1)[1])
+    for i in txt:
+        time = etime
+        if e == True:
+            e = False
+        elif time > 10:
+            try:
+                msg.edit('<b>Error: Нельзя ставить больше 10с!</b>')
+                sleep(0.5)
+                msg.delete()
+            except:
+                pass
+        else:
+            try:
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+                msg.edit(f'{i}')
+                sleep(time/cool)
+            except:
+                pass
+    global number
+    number = number + 1
+
+@app.on_message(filters.command("ziga", prefixes=".") & filters.me)
+def valentine(_, msg):
+    txt = ziga.split("\n\n")
+    e = True
+    etime = int(msg.text.split('.ziga', maxsplit=1)[1])
+    for i in txt:
+        time = etime
+        if e == True:
+            e = False
+        elif time > 10:
+            try:
+                msg.edit('<b>Error: Нельзя ставить больше 10с!</b>')
+                sleep(0.5)
+                msg.delete()
+            except:
+                pass
+        else:
+            try:
+                msg.edit(f'{i}')
+                sleep(time)
+                msg.edit(f'{i}')
+                sleep(time)
+                msg.edit(f'{i}')
+                sleep(time)
+                msg.edit(f'{i}')
+                sleep(time)
+                msg.edit(f'{i}')
+                sleep(time)
+                msg.edit(f'{i}')
+                sleep(time)
+                msg.edit(f'{i}')
+                sleep(time)
+                msg.edit(f'{i}')
+                sleep(time)
+            except:
+                pass
+    global number
+    number = number + 1
+
+@app.on_message(filters.command("like", prefixes=".") & filters.me)
+def betaloves(_, msg):
+    time = 0.6
+    for i in range(1):
+        msg.edit(f'''      
+🟦''')  # red
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦''')  # red
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦🟦🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦🟦🟦🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦🟦🟦🟦🟦🟦''')
+        sleep(0.001)
+        msg.edit(f'''
+🟦🟦🟦🟦🟦🟦🟦🟦
+🟦🟦🟦🟦⬜️🟦🟦🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦⬜️⬜️⬜️🟦⬜️🟦
+🟦🟦🟦🟦🟦🟦🟦🟦''')
+        sleep(5)
+        global number
+        number = number + 1
+
+@app.on_message(filters.command("dislike", prefixes=".") & filters.me)
+def betaloves(_, msg):
+    time = 0.6
+    for i in range(1):
+        msg.edit(f'''
+🟥''')  # red
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥''')  # red
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥🟥⬜️''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥🟥⬜️🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥🟥⬜️🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥🟥⬜️🟥🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥🟥⬜️🟥🟥🟥
+🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥🟥⬜️🟥🟥🟥
+🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥🟥⬜️🟥🟥🟥
+🟥🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥🟥⬜️🟥🟥🟥
+🟥🟥🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥🟥⬜️🟥🟥🟥
+🟥🟥🟥🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥🟥⬜️🟥🟥🟥
+🟥🟥🟥🟥🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥🟥⬜️🟥🟥🟥
+🟥🟥🟥🟥🟥🟥🟥''')
+        sleep(0.001)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥🟥⬜️🟥🟥🟥
+🟥🟥🟥🟥🟥🟥🟥🟥''')
+        sleep(1)
+        msg.edit(f'''
+🈲🈲🈲🈲🈲🈲🈲🈲
+🈲🈲⬜️⬜️⬜️🈲⬜️🈲
+🈲🈲⬜️⬜️⬜️🈲⬜️🈲
+🈲⬜️⬜️⬜️⬜️🈲⬜️🈲
+🈲🈲🈲🈲⬜️🈲🈲🈲
+🈲🈲🈲🈲🈲🈲🈲🈲''')
+        sleep(1)
+        msg.edit(f'''
+🟥🟥🟥🟥🟥🟥🟥🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥⬜️⬜️⬜️🟥⬜️🟥
+🟥⬜️⬜️⬜️⬜️🟥⬜️🟥
+🟥🟥🟥🟥⬜️🟥🟥🟥
+🟥🟥🟥🟥🟥🟥🟥🟥
+''')
+        sleep(1)
+        msg.edit(f'''
+🈲🈲🈲🈲🈲🈲🈲🈲
+🈲🈲⬜️⬜️⬜️🈲⬜️🈲
+🈲🈲⬜️⬜️⬜️🈲⬜️🈲
+🈲⬜️⬜️⬜️⬜️🈲⬜️🈲
+🈲🈲🈲🈲⬜️🈲🈲🈲
+🈲🈲🈲🈲🈲🈲🈲🈲''')
+        sleep(4)
+        global number
+        number = number + 1
 
 @app.on_message(filters.command("loves", prefixes=".") & filters.me)
 def betaloves(_, msg):
     time = 0.6
-    for i in range(2):
+    for i in range(1):
         msg.edit(f'''
 ✨✨✨✨✨✨
 ✨❤️❤️❤️❤️✨
@@ -288,1932 +1266,13 @@ def betaloves(_, msg):
 ✨✨✨✨🧡✨✨✨✨
 ✨✨✨✨✨✨✨✨✨''')
         sleep(3)
-
-@app.on_message(filters.command("random 1000", prefixes=".") & filters.me)
-def betalove(_, msg):
-    random_number = str(random.randint(0, 1000))
-    time = 0.6
-    for i in range(3):
-        msg.edit(roi + random_number)
-        msg.edit(roi + random_number)
-
-
-@app.on_message(filters.command("random 100", prefixes=".") & filters.me)
-def betalove(_, msg):
-    random_number = str(random.randint(0, 100))
-    time = 0.6
-    for i in range(3):
-        msg.edit(roi + random_number)
-        msg.edit(roi + random_number)
-
-@app.on_message(filters.command("random 10", prefixes=".") & filters.me)
-def betalove(_, msg):
-    random_number = str(random.randint(0, 10))
-    time = 0.6
-    for i in range(3):
-        msg.edit(roi + random_number)
-        msg.edit(roi + random_number)
-
-
-too = random.randint(0, 100)
-roi = f'<b> Случайное число: </b>'
-    
-@app.on_message(filters.command("ghoul", prefixes=".") & filters.me)
-def valentine(app, message):
-    app.send_message(message.chat.id,f'<b>Ты гуль?</b>')
-    sleep(2)
-    app.send_message(message.chat.id,f'<i>Я тоже</i>')
-    sleep(5)
-    i = 1000
-    while i > 0:
-        try:
-            app.send_message(message.chat.id, f'{i} - 7 = {i-7}')
-        except FloodWait as e:
-            sleep(e.x)
-
-        i -= 7
-        sleep(0)
-
-    if(end_message != ''):
-        app.send_message(message.chat.id, end_message)
-
-@app.on_message(filters.command("spam 30", prefixes=".") & filters.me)
-def valentine(app, message):
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-
-@app.on_message(filters.command("spam 100", prefixes=".") & filters.me)
-def valentine(app, message):
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-
-
-@app.on_message(filters.command("spam 500", prefixes=".") & filters.me)
-def valentine(app, message):
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-@app.on_message(filters.command("spam 1000", prefixes=".") & filters.me)
-def valentine(app, message):
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-    app.send_message(message.chat.id, f'<b>СПАМ</b>')
-
-@app.on_message(filters.command("Ksyusha", prefixes=".") & filters.me)
-def valentine(app, message):
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-    app.send_message(message.chat.id, f'<b>Ксюша</b>')
-
-@app.on_message(filters.command("help", prefixes="/") & filters.me)
-def valentine(app, message):
-    app.send_message(message.chat.id,f'''
-<b>📙 Команды
-📂Скрипт спама 1000-7
-</b><i>+ Введите: </i><code>.ghoul
-</code><b>📂Скрипт анимации «Я дед инсайд💚»
-</b><i>+ Введите</i> <code>.dead 5     
-</code><b>📂Скрипт анимации для</b><code> </code><b>влюблённых: «Спокойной ночи❤️»
-</b><i>+ Введите </i><code>.night 5
-</code><b>📂Скрипт анимации «Я люблю тебя❤️‍🔥»
-</b><i>+ Введите</i> <code>.love 5   
-</code><b>📂Скрипт анимации «ВЗЛОМ ЖОПЫ»
-</b><i>+ Введите</i><code> .jopa 5   
-</code><b>📂Скрипт анимации «ZIGA»
-</b><i>+ Введите</i><code> .ziga 5  
-</code><b>📂Скрипт анимации «Сердце»
-</b><i>+ Введите</i><code> .heart   
-</code><b>📂Скрипт анимации «Оскорбления 🔞»
-</b><i>+ Введите</i><code> .toxic  
- 
-</code><b>📂Скрипт анимации «Я люблю когда волосатыe... »
-</b><i>+ Введите</i><code> .maslo 
-</code><b>📂Скрипт «Случайное число»
-</b><i>+ Введите</i><code> .random 10/100/1000 </code> \n<b>(Примеры: <code>.random 10</code> ; <code>.random 100</code>)</b>
-</code><b>📂Скрипт «СПАМ»
-</b><i>+ Введите</i><code> .spam 30/100/500/1000 </code> \n<b>(Примеры: <code>.spam 30</code> ; <code>.spam 1000</code>)</b>
-<b>--🔍 Все команды нужно писать в любой чат </b><i><b>телеграмм после выполнения кода! </b>(Ввода зависим. числа)
-</i><b><i>-- 5 в командах это скорость которую можно изменять </i>(Пример: .jopa 0)
-</b><i>Made by </i><i>@starzedscript</i>
-''')
-
-@app.on_message(filters.command("maslo", prefixes=".") & filters.me)
-def betalove(_, msg):
-    time = 0.6
-    for i in range(3):
-        msg.edit(f"<b>я</b>")  # red
-        sleep(time)
-        msg.edit(f"<b>я люблю</b>")  # orange
-        sleep(time)
-        msg.edit(f"<b>я люблю когда</b>")  # orange
-        sleep(time)
-        msg.edit(f"<b>я люблю когда волосатые</b>")  # red
-        sleep(time)
-        msg.edit(f"<b>я люблю когда волосатые мужики</b>")  # orange
-        sleep(time)
-        msg.edit(f"<b>я люблю когда волосатые мужики обмазываются</b>")  # red
-        sleep(time)
-        msg.edit(f"<b>я люблю когда волосатые мужики обмазываются маслом 🧈</b>")  # orange
-
-@app.on_message(filters.command("jopa", prefixes=".") & filters.me)
-def valentine(_, msg):
-    txt = jopa.split("\n")
-    e = True
-    etime = int(msg.text.split('.jopa ', maxsplit=1)[1])
-    for i in txt:
-        time = etime
-        if e == True:
-            e = False
-        elif time > 10:
-            try:
-                msg.edit('<b>Error: Нельзя ставить больше 10с!</b>')
-                sleep(0.5)
-                msg.delete()
-            except:
-                pass
-        else:
-            try:
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-            except:
-                pass
-
-@app.on_message(filters.command("love", prefixes=".") & filters.me)
-def valentine(_, msg):
-    txt = love.split("\n")
-    e = True
-    etime = int(msg.text.split('.love', maxsplit=1)[1])
-    for i in txt:
-        time = etime
-        if e == True:
-            e = False
-        elif time > 10:
-            try:
-                msg.edit('<b>Error: Нельзя ставить больше 10с!</b>')
-                sleep(0.5)
-                msg.delete()
-            except:
-                pass
-        else:
-            try:
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-            except:
-                pass
-
-@app.on_message(filters.command("zxc", prefixes=".") & filters.me)
-def valentine(_, msg):
-    txt = zxc.split("\n")
-    e = True
-    etime = int(msg.text.split('.zxc', maxsplit=1)[1])
-    for i in txt:
-        time = etime
-        if e == True:
-            e = False
-        elif time > 10:
-            try:
-                msg.edit('<b>Error: Нельзя ставить больше 10с!</b>')
-                sleep(0.5)
-                msg.delete()
-            except:
-                pass
-        else:
-            try:
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-                msg.edit(f'{i}')
-                sleep(time/cool)
-            except:
-                pass
-
-@app.on_message(filters.command("ziga", prefixes=".") & filters.me)
-def valentine(_, msg):
-    txt = ziga.split("\n\n")
-    e = True
-    etime = int(msg.text.split('.ziga', maxsplit=1)[1])
-    for i in txt:
-        time = etime
-        if e == True:
-            e = False
-        elif time > 10:
-            try:
-                msg.edit('<b>Error: Нельзя ставить больше 10с!</b>')
-                sleep(0.5)
-                msg.delete()
-            except:
-                pass
-        else:
-            try:
-                msg.edit(f'{i}')
-                sleep(time)
-                msg.edit(f'{i}')
-                sleep(time)
-                msg.edit(f'{i}')
-                sleep(time)
-                msg.edit(f'{i}')
-                sleep(time)
-                msg.edit(f'{i}')
-                sleep(time)
-                msg.edit(f'{i}')
-                sleep(time)
-                msg.edit(f'{i}')
-                sleep(time)
-                msg.edit(f'{i}')
-                sleep(time)
-            except:
-                pass
+        global number
+        number = number + 1
 
 @app.on_message(filters.command("heart", prefixes=".") & filters.me)
 def betalove(_, msg):
     time = 0.6
-    for i in range(3):
+    for i in range(1):
         msg.edit(f"🤍🤍🤍🤍🤍🤍🤍🤍🤍\n🤍🤍❤️❤️🤍❤️❤️🤍🤍\n🤍❤️❤️❤️❤️❤️❤️❤️🤍\n🤍🤍❤️❤️❤️❤️❤️🤍🤍\n🤍🤍🤍❤️❤️❤️🤍🤍🤍\n🤍🤍🤍🤍❤️🤍🤍🤍🤍\n🤍🤍🤍🤍🤍🤍🤍🤍🤍\n")  # red
         sleep(time)
         msg.edit(f"🤍🤍🤍🤍🤍🤍🤍🤍🤍\n🤍🤍🧡🧡🤍🧡🧡🤍🤍\n🤍🧡🧡🧡🧡🧡🧡🧡🤍\n🤍🤍🧡🧡🧡🧡🧡🤍🤍\n🤍🤍🤍🧡🧡🧡🤍🤍🤍\n🤍🤍🤍🤍🧡🤍🤍🤍🤍\n🤍🤍🤍🤍🤍🤍🤍🤍🤍\n")  # orange
@@ -2293,7 +1352,8 @@ def betalove(_, msg):
         sleep(time)
         msg.edit(f"🤍🤍🤍🤍🤍🤍🤍🤍🤍\n🤍🤍🖤🖤🤍🖤🖤🤍🤍\n🤍🖤🖤🖤🖤🖤🖤🖤🤍\n🤍🤍🖤🖤🖤🖤🖤🤍🤍\n🤍🤍🤍🖤🖤🖤🤍🤍🤍\n🤍🤍🤍🤍🖤🤍🤍🤍🤍\n🤍🤍🤍🤍🤍🤍🤍🤍🤍\n")  # black
         sleep(1)
-
+        global number
+        number = number + 1
 
 @app.on_message(filters.command("toxic", prefixes=".") & filters.me)
 def valentine(app, message):
@@ -2476,8 +1536,11 @@ def valentine(app, message):
     app.send_message(message.chat.id, f'''
      <b>страхапиздище ебосос дурфанка косоуебище долбоногий лихохуетень</b>
      ''')
+    sleep(0.5)
+    global number
+    number = number + 1
 
-@app.on_message(filters.command("egortox", prefixes=".") & filters.me)
+@app.on_message(filters.command("egrtox", prefixes=".") & filters.me)
 def valentine(app, message):
     app.send_message(message.chat.id,f'''
 <b>творение пьяной акушерки</b>
@@ -2549,29 +1612,17 @@ jopa = '''
 '''
 zxc = '''
 <b>- All my friends are toxic, all ambitionless 💚</b>
-
 <b>- All my friends are toxic, all ambitionless 💜</b>
-
 <b>- All my friends are toxic, all ambitionless 💛</b>
-
 <b>- So rude and always negative 🤍</b>
-
 <b>- So rude and always negative 💚</b>
-
 <b>- So rude and always negative 💛</b>
-
 <b>- I need new friends, but it's not  that quick and easy 💔</b>
-
 <b>- I need new friends, but it's not  that quick and easy 💛</b>
-
 <b>- I need new friends, but it's not  that quick and easy 💚</b>
-
 <b>- Oh, I'm drowning, let me breathe 💜</b>
-
 <b>- Oh, I'm drowning, let me breathe 💛</b>
-
 <b>- Oh, I'm drowning, let me breathe 💛</b>
-
 '''
 
 
@@ -2593,7 +1644,148 @@ love = '''
 <b>Я люблю тебя ❤️‍🔥</b>
 <b>Я люблю тебя ❤️‍🔥</b>
 <b>Я люблю тебя ❤️‍🔥</b>
+'''
 
+comp = '''
+<b>Крошечные напоминания того, что ты...</b> 
+
+<b>Самая удивительная</b> ✨
+
+<b>Самая внимательная</b> ✨
+
+<b>Самая красивая</b> ✨
+
+<b>Самая успешная</b> ✨
+
+<b>Самая заботливая</b> ✨
+
+<b>Самая милая</b> ✨
+
+<b>Самая прекрасная</b> ✨
+
+<b>Самая умная</b> ✨
+
+<b>Самая шикарная</b> ✨
+
+<b>Самая обалденная ✨</b>
+
+<b>Самая очаровашка</b> ✨
+
+<b>Самая любимая</b> ✨
+
+<b>Самая весёлая</b> ✨
+
+<b>Самая нежная</b> ✨
+
+<b>Самая яркая</b> ✨
+
+<b>Самая прелестная</b> ✨
+
+<b>Самая приятная</b> ✨
+
+<b>Самая сладкая</b> ✨
+
+<b>Самая дивная</b> ✨
+
+<b>Самая ангельская</b> ✨
+
+<b>Самая добрая</b> ✨
+
+<b>Самая бесподобная</b> ✨
+
+<b>Самая волшебная</b> ✨
+
+<b>Самая лучшая</b> ✨
+
+<b>Самая крутышка</b> ✨
+
+<b>Самая аромтная</b> ✨
+
+<b>Самая единственная</b> ✨
+
+<b>Самая искренняя</b> ✨
+
+<b>Самая ласковая</b> ✨
+
+<b>Самая романтичная</b> ✨
+
+<b>Самая великолепная</b> ✨
+
+<b>Самая внимательная</b> ✨
+
+<b>Самая страстная</b> ✨
+
+<b>Самая игривая</b> ✨
+
+<b>Самая стройная</b> ✨
+
+<b>Самая безумная</b> ✨
+
+<b>Самая симпатичная</b> ✨
+
+<b>Самая изящная </b> ✨
+
+<b>Самая талантливая ✨</b>
+
+<b>Самая элегантная ✨</b>
+
+<b>Самая чуткая ✨</b>
+
+<b>Самая отзывчивая ✨</b>
+
+<b>Самая уникальная ✨</b>
+
+<b>Самая смелая ✨</b>
+
+<b>Самая уверенная ✨</b>
+
+<b>Самая особенная ✨</b>
+
+<b>Самая изумительная ✨</b>
+
+<b>Самая настоящая ✨</b>
+
+<b>Самая обаятельная ✨</b>
+
+<b>Самая пушистая ✨</b>
+
+<b>Самая кокетливая ✨</b>
+
+<b>Самая теплая ✨</b>
+
+<b>Самая энергичная ✨</b>
+
+<b>Самая неотразимая ✨</b>
+
+<b>Самая неописуемая ✨</b>
+
+<b>Самая грациозная ✨</b>
+
+<b>Самая сказочная ✨</b>
+
+<b>Самая желанная ✨</b>
+
+<b>Самая изысканная ✨</b>
+
+<b>Самая мечтательная ✨</b>
+
+<b>Самая безупречная ✨</b>
+
+<b>Самая совершеная ✨</b>
+
+<b>Самая честная ✨</b>
+
+<b>Самая улыбчивая ✨</b>
+
+<b>Самая ненаглядная ✨</b>
+
+<b>Самая женственная ✨</b>
+
+<b>Самая цветущая ✨</b>
+
+<b>Самая гармоничная ✨</b>
+
+<b>Самая отпадная ✨</b>
 '''
 
 ziga = '''
