@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 import random
 import pickle
+import asyncio
 from time import sleep
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 import os
 
-app = Client('cmd', api_id=15897262, api_hash='90476d9c65a86b03837e1e249314cd75')
+app = Client('admin', api_id=15897262, api_hash='90476d9c65a86b03837e1e249314cd75')
 
 app.start()
 
@@ -50,7 +51,13 @@ while cool < 0:
     print("Чё, дурак? Куда тебе столько")
     cool = int(input("Введи завис.число - от него будет зависеть скорость (Минимум 3):  "))
 
-
+@app.on_message(filters.command("gifspam", prefixes=".") & filters.me)
+def sendgif(app, message):
+    global number
+    number = number + 1
+    for _ in range(int(message.command[1])):
+        sleep(0.01)
+        app.send_document(message.chat.id, "https://tenor.com/view/spam-toon-toonio-%D1%82%D1%83%D0%BD%D0%B8%D0%BE-pomidorkin-gif-24712213")
 
 @app.on_message(filters.command("dead", prefixes=".") & filters.me)
 def valentine(_, msg):
@@ -96,6 +103,68 @@ textded = '''
 <b> Мне 9 лет </b>
 <b> И я хочу в Психокидс </b>
 '''
+
+
+@app.on_message(filters.command("drugs", prefixes=".") & filters.me)
+async def valentine(client, message):
+    global number
+    number = number + 1
+    text = f"<b>💊 Поиск запрещённых препаратов.. </b>"
+    await message.edit(str(text))
+    await asyncio.sleep(2)
+    kilogramm = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+    text2 = f"<b>🚬 Найдено {random.choice(kilogramm)} кг шпекса</b>"
+    await message.edit(str(text2))
+    await asyncio.sleep(3)
+    text3 = f"<b>🌿⚗️ Оформляем вкид</b>"
+    await message.edit(str(text3))
+    await asyncio.sleep(5)
+    drugsss = [f'<b>😳 Вас успешно откачали, пожалуйста, больше не принимайте запрещённые препараты</b>',
+               f'<b>🥴 Вы пожилой наркоман, вас не берёт одна доза, вам необходимо больше, попробуйте  ещё раз оформить вкид</b>',
+               f'<b>😖 Сегодня не ваш день, вы хоть и пожилой, но приняли слишком много. Окончательная причина смерти - передоз</b>',
+               f'<b>😌 Вы оформили вкид, Вам понравилось</b>']
+    drug = random.choice(drugsss)
+    await message.edit(drug)
+    await asyncio.sleep(5)
+
+@app.on_message(filters.command("mum", prefixes=".") & filters.me)
+async def mum(client, message):
+    global number
+    number = number + 1
+    mamka = [f'<b>❌ Мамаша не найдена</b>',f'<b> ✅ МАМАША НАЙДЕНА</b>' ]
+    text = "<b>🔍 Поиск твоей мамки начался...</b>"
+    await message.edit(str(text))
+    await asyncio.sleep(3.0)
+    text2 = "<b>🔍 Ищем твою мамашу на Авито... </b>"
+    await message.edit(str(text2))
+    await asyncio.sleep(1)
+    text3 = random.choice(mamka)
+    await message.edit(str(text3))
+    await asyncio.sleep(3.0)
+    text4 = "<b>🔍 Поиск твоей мамаши на свалке... </b>"
+    await message.edit(str(text4))
+    await asyncio.sleep(3.0)
+    text5 = random.choice(mamka)
+    await message.edit(str(text5))
+    await asyncio.sleep(5.0)
+
+@app.on_message(filters.command("xuy", prefixes=".") & filters.me)
+async def valentine(app, message):
+    await message.edit(f'''<b>🍆🍆
+🍆🍆🍆
+  🍆🍆🍆
+    🍆🍆🍆
+     🍆🍆🍆
+       🍆🍆🍆
+        🍆🍆🍆
+         🍆🍆🍆
+          🍆🍆🍆
+          🍆🍆🍆
+      🍆🍆🍆🍆
+ 🍆🍆🍆🍆🍆🍆
+ 🍆🍆🍆  🍆🍆🍆
+    🍆🍆        🍆🍆</b>''')
+
 
 @app.on_message(filters.command("type", prefixes=".") & filters.me)
 def valentine(_, msg):
@@ -254,19 +323,12 @@ def valentine(app, message):
 
 @app.on_message(filters.command("spam", prefixes=".") & filters.me)
 def spam(app, message):
+    spams = " ".join(message.command[2:])
     global number
     number = number + 1
     for _ in range(int(message.command[1])):
         sleep(0.01)
-        app.send_message(message.chat.id, "<b>СПАМ</b>")
-
-@app.on_message(filters.command("ksu", prefixes=".") & filters.me)
-def spam(app, message):
-    global number
-    number = number + 1
-    for _ in range(int(message.command[1])):
-        sleep(0.01)
-        app.send_message(message.chat.id, "<b>Ксюша</b>")
+        app.send_message(message.chat.id, spams)
 
 @app.on_message(filters.command("spamstick", prefixes=".") & filters.me)
 def spam(app, message):
